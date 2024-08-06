@@ -8,7 +8,7 @@ const Home = () => {
   const [todos, setTodos] = useState([]);
   const [doneTasks, setDoneTasks] = useState([]);
 
-  useEffect(() => {
+  const refreshTasks = () => {
     fetch('http://127.0.0.1:8000/api/tasks').then(
       dat => (dat.json())
     ).then(data => {
@@ -27,7 +27,26 @@ const Home = () => {
       setTodos(td);
       setDoneTasks(dt);
     })
+  }
 
+  const updateTask = (payload) => {
+    return (e) => {
+
+      let form = new FormData();
+      form.append('finished', payload.val)
+
+      fetch(`http://127.0.0.1:8000/api/tasks/update/${payload.id}`, {
+        method: 'POST',
+        body: form
+      }).then( _ => {
+        refreshTasks()
+      })
+
+    }
+  }
+
+  useEffect(() => {
+    refreshTasks();
   }, []);
 
   if (todos.length === 0 && doneTasks.length === 0) {
@@ -45,14 +64,14 @@ const Home = () => {
         <div>
           <h2 className="text-2xl animate-pulse">To Do!</h2>
           {
-            todos.map(task => <ItemCard card={task}/>)
+            todos.map(task => <ItemCard card={task} updateTask={updateTask}/>)
           }
         </div>
 
         <div>
           <h2 className="text-2xl animate-pulse">All Done!</h2>
           {
-            doneTasks.map(task => <ItemCard card={task}/>)
+            doneTasks.map(task => <ItemCard card={task} updateTask={updateTask}/>)
           }
         </div>
 

@@ -17,6 +17,7 @@ def index(req):
     
     for task in tasks_set:
         tasks[task.id] = {
+            'id': task.id,
             'name': task.name,
             'desc': task.desc,
             'finished': task.finished
@@ -60,11 +61,13 @@ def update_task(req, id):
     
     curr_task.save()
     
-    return JsonResponse({id: {
-        'name': curr_task.name,
-        'desc': curr_task.desc,
-        'finished': curr_task.finished
-    }})
+    return JsonResponse({
+        id: {
+            'name': curr_task.name,
+            'desc': curr_task.desc,
+            'finished': curr_task.finished
+            }
+    })
 
 
 # delete task

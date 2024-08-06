@@ -1,6 +1,7 @@
 
 
-const ItemCard = ({card}) => {
+const ItemCard = ({card, updateTask}) => {
+
 
     return (
         <div className="border p-6">
@@ -8,7 +9,10 @@ const ItemCard = ({card}) => {
 
             <desc>{card.desc}</desc>
             <br/>
-            <button className="border rounded-lg p-2 mt-2 hover:bg-green-300">
+            <button 
+                className="border rounded-lg p-2 mt-2 hover:bg-green-300"
+                onClick={updateTask({id: card.id, val: !card.finished})}
+            >
                 {
                     card.finished ? 'uncomplete' : 'complete'
                 }
