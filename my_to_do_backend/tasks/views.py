@@ -43,6 +43,29 @@ def create_task(req):
         }
     })
 
+# update task
+@csrf_exempt
+def update_task(req, id):
+    # if we wanted to be more error catching, 
+    # when object.get doesn't find something it throws an error
+    # we could use a try block here to catch that
+    curr_task = Task.objects.get(pk=id)
+    
+    if 'name' in req.POST:
+        curr_task.name = req.POST['name']
+    if 'desc' in req.POST:
+        curr_task.desc = req.POST['desc']
+    if 'finished' in req.POST:
+        curr_task.finished = req.POST['finished'] == 'true'
+    
+    curr_task.save()
+    
+    return JsonResponse({id: {
+        'name': curr_task.name,
+        'desc': curr_task.desc,
+        'finished': curr_task.finished
+    }})
+
 
 # delete task
 @csrf_exempt
