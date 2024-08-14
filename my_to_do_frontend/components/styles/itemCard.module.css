@@ -1,0 +1,10 @@
+
+
+.itemCard:hover h3 button {
+    opacity: 100;
+}
+
+.editButton {
+    opacity: 0;
+    transition: opacity 500ms;
+}

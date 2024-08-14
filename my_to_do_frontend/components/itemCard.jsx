@@ -1,11 +1,23 @@
-
+import { useRouter } from 'next/navigation';
+import styles from './styles/itemCard.module.css';
 
 const ItemCard = ({card, updateTask}) => {
+    const rount = useRouter();
 
+    const editTask = (e) => {
+        e.stopPropagation();
+        rount.push(`/edit/${card.id}`)
+    }
 
     return (
-        <div className="border p-6">
-            <h3 className="text-lg underline">{card.name}</h3>
+        <div className={`${styles.itemCard} border p-6`}>
+            <h3 className="text-lg underline flex justify-between">
+                {card.name}
+
+                <button className={styles.editButton} onClick={editTask}>
+                    edit
+                </button>
+            </h3>
 
             <desc>{card.desc}</desc>
             <br/>
