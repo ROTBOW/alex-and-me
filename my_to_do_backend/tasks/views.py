@@ -25,6 +25,16 @@ def index(req):
     
     return JsonResponse(tasks)
 
+# show task by id
+def show_task(req, id) -> JsonResponse:
+    task = Task.objects.get(pk=id)
+    res = {
+        'name': task.name,
+        'desc': task.desc,
+        'finished': task.finished
+    }
+    
+    return JsonResponse(res)
 
 # creation of task
 @csrf_exempt
