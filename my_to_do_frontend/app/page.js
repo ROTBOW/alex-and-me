@@ -67,14 +67,14 @@ const Home = () => {
         <div>
           <h2 className="text-2xl animate-pulse">To Do!</h2>
           {
-            todos.map(task => <ItemCard card={task} updateTask={updateTask}/>)
+            todos.map(task => <ItemCard card={task} updateTask={updateTask} refreshTasks={refreshTasks}/>)
           }
         </div>
 
         <div>
           <h2 className="text-2xl animate-pulse">All Done!</h2>
           {
-            doneTasks.map(task => <ItemCard card={task} updateTask={updateTask}/>)
+            doneTasks.map(task => <ItemCard card={task} updateTask={updateTask} refreshTasks={refreshTasks}/>)
           }
         </div>
 
