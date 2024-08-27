@@ -1,4 +1,3 @@
-# from django.shortcuts import render
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 
@@ -11,7 +10,7 @@ def ping(req):
 
 
 # index of tasks
-def index(req):
+def index(req) -> JsonResponse:
     tasks_set = Task.objects.all()
     tasks = dict()
     
@@ -38,12 +37,12 @@ def show_task(req, id) -> JsonResponse:
 
 # creation of task
 @csrf_exempt
-def create_task(req):
+def create_task(req) -> JsonResponse:
     new_task = Task()
     
     new_task.name = req.POST['name']
     new_task.desc = req.POST['desc']
-    new_task.finished = req.POST['finished']
+    new_task.finished = req.POST['finished'] or False
     
     new_task.save()
     return JsonResponse({
@@ -54,9 +53,10 @@ def create_task(req):
         }
     })
 
+
 # update task
 @csrf_exempt
-def update_task(req, id):
+def update_task(req, id) -> JsonResponse:
     # if we wanted to be more error catching, 
     # when object.get doesn't find something it throws an error
     # we could use a try block here to catch that
@@ -82,7 +82,7 @@ def update_task(req, id):
 
 # delete task
 @csrf_exempt
-def delete_task(req, id):
+def delete_task(req, id) -> JsonResponse:
     task_to_delete = Task.objects.filter(id=id)
     task_to_delete.delete()
     

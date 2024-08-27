@@ -1,6 +1,7 @@
 "use client"
 
 import ItemCard from "@/components/itemCard";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 
@@ -58,6 +59,8 @@ const Home = () => {
   return (
     <main className="flex flex-col items-center mt-8 font-mono text-green-500">
       <h1 className="text-4xl">My To-Do list!</h1>
+
+      <Link href="/new" className="p-1 border rounded text-xl mt-4 hover:bg-green-300 hover:text-black">New Task</Link>
 
       <section className="mt-16 flex w-1/2 justify-between">
 

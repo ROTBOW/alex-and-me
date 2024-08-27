@@ -8,12 +8,12 @@ urlpatterns = [
     
     # Index of all tasks
     path('tasks', views.index),
+        
+    # create task
+    path('tasks/new', views.create_task),
     
     # show task by id
     path('tasks/<id>', views.show_task),
-    
-    # create task
-    path('tasks/new', views.create_task),
     
     # update task
     path('tasks/update/<id>', views.update_task),

@@ -22,7 +22,7 @@ const ItemCard = ({card, updateTask}) => {
             <desc>{card.desc}</desc>
             <br/>
             <button 
-                className="border rounded-lg p-2 mt-2 hover:bg-green-300"
+                className="border rounded-lg p-2 mt-2 hover:bg-green-300 hover:text-black"
                 onClick={updateTask({id: card.id, val: !card.finished})}
             >
                 {
